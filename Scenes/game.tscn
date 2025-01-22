@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://drvy0fs4okf4v"]
+
+[ext_resource type="Texture2D" uid="uid://chjb2yqrpaadm" path="res://Sprites/TestMap.png" id="1_x0fgi"]
+[ext_resource type="PackedScene" uid="uid://cuiiillv7rwnd" path="res://Scenes/player.tscn" id="2_yxle0"]
+[ext_resource type="Script" path="res://Scenes/player.gd" id="3_p7u4k"]
+
+[node name="GameScene" type="Node2D"]
+texture_filter = 1
+
+[node name="MG" type="Node2D" parent="."]
+position = Vector2(0, -40)
+
+[node name="Sprite" type="Sprite2D" parent="MG"]
+texture = ExtResource("1_x0fgi")
+centered = false
+
+[node name="Colliders" type="StaticBody2D" parent="MG"]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MG/Colliders"]
+polygon = PackedVector2Array(360, 373, 358, 400, 1000, 400, 1000, 371, 362, 371)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="MG/Colliders"]
+polygon = PackedVector2Array(174, 19, 176, 17, 176, 0, 0, 0, 0, 400, 274, 400, 272, 373, 270, 371, 21, 371, 21, 41, 37, 19)
+
+[node name="Player" parent="." instance=ExtResource("2_yxle0")]
+script = ExtResource("3_p7u4k")

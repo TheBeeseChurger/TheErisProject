@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuiiillv7rwnd"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_gxw5g"]
+[ext_resource type="Texture2D" uid="uid://cnavscrpjsc5j" path="res://Sprites/Eris.png" id="2_k1lau"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oyldp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_k1lau")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tkywe"]
+radius = 22.0
+height = 96.0
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(50, 250)
+script = ExtResource("1_gxw5g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_oyldp")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_tkywe")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-200, -180)
+anchor_mode = 0
+limit_left = 0
+limit_bottom = 360
