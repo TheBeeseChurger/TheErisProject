@@ -8,11 +8,11 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_kill_floor_entered(body: Node2D) -> void:
 	if body != player:
 		return
 	
-	get_tree().reload_current_scene()
+	get_tree().call_deferred("reload_current_scene")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://drvy0fs4okf4v"]
+[gd_scene load_steps=6 format=3 uid="uid://drvy0fs4okf4v"]
 
 [ext_resource type="Script" path="res://Scenes/game.gd" id="1_r5hwt"]
 [ext_resource type="Texture2D" uid="uid://chjb2yqrpaadm" path="res://Sprites/TestMap.png" id="1_x0fgi"]
 [ext_resource type="PackedScene" uid="uid://cuiiillv7rwnd" path="res://Scenes/player.tscn" id="2_yxle0"]
+[ext_resource type="Script" path="res://Scenes/camera_manager.gd" id="4_mbf26"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hp1i2"]
 normal = Vector2(0, -4.095)
@@ -37,5 +38,12 @@ debug_color = Color(0.253033, 0.555484, 0.825204, 0.42)
 
 [node name="Player" parent="." instance=ExtResource("2_yxle0")]
 position = Vector2(70, 230)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-200, -180)
+anchor_mode = 0
+limit_left = 0
+limit_bottom = 360
+script = ExtResource("4_mbf26")
 
 [connection signal="body_entered" from="MG/Area2D" to="." method="_on_kill_floor_entered"]

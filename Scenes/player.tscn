@@ -47,8 +47,5 @@ shape = SubResource("RectangleShape2D_phrwv")
 disabled = true
 debug_color = Color(0.929662, 0.2192, 0.386028, 0.42)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-200, -180)
-anchor_mode = 0
-limit_left = 0
-limit_bottom = 360
+[node name="CameraPos" type="Marker2D" parent="."]
+position = Vector2(-73.03, -243.32)
