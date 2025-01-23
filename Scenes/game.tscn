@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://drvy0fs4okf4v"]
+[gd_scene load_steps=6 format=3 uid="uid://drvy0fs4okf4v"]
 
+[ext_resource type="Script" path="res://Scenes/game.gd" id="1_r5hwt"]
 [ext_resource type="Texture2D" uid="uid://chjb2yqrpaadm" path="res://Sprites/TestMap.png" id="1_x0fgi"]
 [ext_resource type="PackedScene" uid="uid://cuiiillv7rwnd" path="res://Scenes/player.tscn" id="2_yxle0"]
-[ext_resource type="Script" path="res://Scenes/player.gd" id="3_p7u4k"]
+[ext_resource type="Script" path="res://Scenes/camera_manager.gd" id="4_mbf26"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hp1i2"]
+normal = Vector2(0, -4.095)
+distance = -100.0
 
 [node name="GameScene" type="Node2D"]
 texture_filter = 1
+script = ExtResource("1_r5hwt")
 
 [node name="MG" type="Node2D" parent="."]
 position = Vector2(0, -40)
@@ -14,14 +20,30 @@ position = Vector2(0, -40)
 texture = ExtResource("1_x0fgi")
 centered = false
 
-[node name="Colliders" type="StaticBody2D" parent="MG"]
+[node name="WallColliders" type="StaticBody2D" parent="MG"]
 visible = false
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MG/Colliders"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MG/WallColliders"]
 polygon = PackedVector2Array(360, 373, 358, 400, 1000, 400, 1000, 371, 362, 371)
 
-[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="MG/Colliders"]
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="MG/WallColliders"]
 polygon = PackedVector2Array(174, 19, 176, 17, 176, 0, 0, 0, 0, 400, 274, 400, 272, 373, 270, 371, 21, 371, 21, 41, 37, 19)
 
+[node name="Area2D" type="Area2D" parent="MG"]
+monitorable = false
+
+[node name="KillFloor" type="CollisionShape2D" parent="MG/Area2D"]
+shape = SubResource("WorldBoundaryShape2D_hp1i2")
+debug_color = Color(0.253033, 0.555484, 0.825204, 0.42)
+
 [node name="Player" parent="." instance=ExtResource("2_yxle0")]
-script = ExtResource("3_p7u4k")
+position = Vector2(70, 230)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-200, -180)
+anchor_mode = 0
+limit_left = 0
+limit_bottom = 360
+script = ExtResource("4_mbf26")
+
+[connection signal="body_entered" from="MG/Area2D" to="." method="_on_kill_floor_entered"]

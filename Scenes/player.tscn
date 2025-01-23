@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuiiillv7rwnd"]
+[gd_scene load_steps=7 format=3 uid="uid://cuiiillv7rwnd"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_gxw5g"]
 [ext_resource type="Texture2D" uid="uid://cnavscrpjsc5j" path="res://Sprites/Eris.png" id="2_k1lau"]
+[ext_resource type="Texture2D" uid="uid://cu7ir7s4is15v" path="res://Sprites/Sword.png" id="3_7013k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oyldp"]
 animations = [{
@@ -12,13 +13,25 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_7013k")
+}],
+"loop": true,
+"name": &"swd_default",
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tkywe"]
 radius = 22.0
 height = 96.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_phrwv"]
+size = Vector2(132, 44)
+
 [node name="Player" type="CharacterBody2D"]
+texture_filter = 1
 position = Vector2(50, 250)
 script = ExtResource("1_gxw5g")
 
@@ -29,8 +42,10 @@ autoplay = "default"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_tkywe")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-200, -180)
-anchor_mode = 0
-limit_left = 0
-limit_bottom = 360
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_phrwv")
+disabled = true
+debug_color = Color(0.929662, 0.2192, 0.386028, 0.42)
+
+[node name="CameraPos" type="Marker2D" parent="."]
+position = Vector2(-73.03, -243.32)
